@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="../static/cssjs/css/reglogin.css" rel='stylesheet' type='text/css' />
+<!-- Bootstrap Core CSS -->
+<link href="../static/cssjs/sbadmin2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- MetisMenu CSS -->
+<link href="../static/cssjs/sbadmin2/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../static/cssjs/sbadmin2/dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="../static/cssjs/sbadmin2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="main">
+		<div class="header" >
+			<h1>Create a Free Account!</h1>
+		</div>
+		<form action="/login/" method="post">
+			<ul class="left-form">
+				<h2>New Account:</h2>
+					<li>
+						{{ regForm.username }}
+						<div class="clear"> </div>
+					</li>
+					<li>
+						{{ regForm.email }}
+						<div class="clear"> </div>
+					</li>
+					<li>
+						{{ regForm.password }}
+						<div class="clear"> </div>
+					</li>
+
+				<input type="submit" value="Create And Login">
+				<div class="clear"> </div>
+			</ul>
+			<div class="clear"> </div>
+		</form>
+	</div>
+</body>
+</html>

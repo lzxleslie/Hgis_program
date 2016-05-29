@@ -1,0 +1,15 @@
+(function() {
+    var txtArea = $('#mssStyle');
+    var codeMirror = CodeMirror.fromTextArea(txtArea, {
+        mode: "css",
+        tabMode: 'shift',
+        lineNumbers: true,
+        smartIndent: true,
+        tabSize: 2,
+        autoMatchParens: true
+    });
+
+    // codeMirror.on('change', function (a, b) {
+        // console.log(b);
+    // })
+})();

@@ -1,0 +1,200 @@
+*** Starting uWSGI 2.0.12 (64bit) on [Tue May 17 14:16:21 2016] ***
+compiled with version: 4.8.4 on 04 May 2016 09:58:47
+os: Linux-4.2.0-36-generic #41~14.04.1-Ubuntu SMP Tue Apr 19 17:03:32 UTC 2016
+nodename: whu-VirtualBox
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /home/whu/projects/osmdjango
+detected binary path: /usr/local/bin/uwsgi
+chdir() to /home/whu/projects/osmdjango
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 23352
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address :8077 fd 3
+Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xe814d0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 582144 bytes (568 KB) for 8 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0xe814d0 pid: 29474 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI worker 1 (pid: 29474, cores: 1)
+spawned uWSGI worker 2 (pid: 29477, cores: 1)
+spawned uWSGI worker 3 (pid: 29478, cores: 1)
+spawned uWSGI worker 4 (pid: 29479, cores: 1)
+spawned uWSGI worker 5 (pid: 29480, cores: 1)
+spawned uWSGI worker 6 (pid: 29481, cores: 1)
+spawned uWSGI worker 7 (pid: 29482, cores: 1)
+spawned uWSGI worker 8 (pid: 29483, cores: 1)
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+*** Starting uWSGI 2.0.12 (64bit) on [Tue May 17 14:19:30 2016] ***
+compiled with version: 4.8.4 on 04 May 2016 09:58:47
+os: Linux-4.2.0-36-generic #41~14.04.1-Ubuntu SMP Tue Apr 19 17:03:32 UTC 2016
+nodename: whu-VirtualBox
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /home/whu/projects/osmdjango
+detected binary path: /usr/local/bin/uwsgi
+chdir() to /home/whu/projects/osmdjango
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 23352
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8077).
+bind(): Address already in use [core/socket.c line 769]
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+*** Starting uWSGI 2.0.12 (64bit) on [Tue May 17 14:20:53 2016] ***
+compiled with version: 4.8.4 on 04 May 2016 09:58:47
+os: Linux-4.2.0-36-generic #41~14.04.1-Ubuntu SMP Tue Apr 19 17:03:32 UTC 2016
+nodename: whu-VirtualBox
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /home/whu/projects/osmdjango
+detected binary path: /usr/local/bin/uwsgi
+chdir() to /home/whu/projects/osmdjango
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 23352
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8077).
+bind(): Address already in use [core/socket.c line 769]
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+*** Starting uWSGI 2.0.12 (64bit) on [Tue May 17 15:13:42 2016] ***
+compiled with version: 4.8.4 on 04 May 2016 09:58:47
+os: Linux-4.2.0-36-generic #42~14.04.1-Ubuntu SMP Fri May 13 17:27:22 UTC 2016
+nodename: whu-VirtualBox
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /home/whu/projects/osmdjango
+detected binary path: /usr/local/bin/uwsgi
+chdir() to /home/whu/projects/osmdjango
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 23352
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address :8077 fd 3
+Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x8774d0
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 582144 bytes (568 KB) for 8 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x8774d0 pid: 5949 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI worker 1 (pid: 5949, cores: 1)
+spawned uWSGI worker 2 (pid: 5952, cores: 1)
+spawned uWSGI worker 3 (pid: 5953, cores: 1)
+spawned uWSGI worker 4 (pid: 5954, cores: 1)
+spawned uWSGI worker 5 (pid: 5955, cores: 1)
+spawned uWSGI worker 6 (pid: 5956, cores: 1)
+spawned uWSGI worker 7 (pid: 5957, cores: 1)
+spawned uWSGI worker 8 (pid: 5958, cores: 1)
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+*** Starting uWSGI 2.0.12 (64bit) on [Tue May 17 15:20:06 2016] ***
+compiled with version: 4.8.4 on 04 May 2016 09:58:47
+os: Linux-4.2.0-36-generic #42~14.04.1-Ubuntu SMP Fri May 13 17:27:22 UTC 2016
+nodename: whu-VirtualBox
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /home/whu/projects/osmdjango
+detected binary path: /usr/local/bin/uwsgi
+chdir() to /home/whu/projects/osmdjango
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 23352
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8077).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.12 (64bit) on [Tue May 17 15:24:03 2016] ***
+compiled with version: 4.8.4 on 04 May 2016 09:58:47
+os: Linux-4.2.0-36-generic #42~14.04.1-Ubuntu SMP Fri May 13 17:27:22 UTC 2016
+nodename: whu-VirtualBox
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /home/whu/projects/osmdjango
+detected binary path: /usr/local/bin/uwsgi
+chdir() to /home/whu/projects/osmdjango
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 23352
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8077).
+bind(): Address already in use [core/socket.c line 769]
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip

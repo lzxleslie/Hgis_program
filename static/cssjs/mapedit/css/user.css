@@ -1,0 +1,112 @@
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    font-family: sans-serif;
+}
+
+#map {
+    top:50px;
+    left:50px;
+    position: absolute;
+    right:35%;
+    bottom:0;
+    z-index: 5;
+}
+.sidebutton{
+    position: absolute;
+    height:60px;
+    width:60px;
+    color: inherit;
+    background-color: transparent;
+}
+.sidebar {
+    position: absolute;
+    width: 35%;
+    top:0px;
+    bottom: 0;
+    right: 0;
+    vertical-align: middle;
+    background-color: #f2f2f2;
+}
+.leftsidebar {
+  position: absolute;
+  overflow: hidden;
+  width: 50px;
+  top:50px;
+  bottom: 0;
+  left: 0;
+  vertical-align: middle;
+  z-index: 10;
+  /*border-left: 1px #333 solid;*/
+  background-color: #000;
+  filter:alpha(opacity=50); /*IE滤镜，透明度50%*/
+  -moz-opacity:0.5; /*Firefox私有，透明度50%*/
+  opacity:0.5;/*其他，透明度50%*/
+  -webkit-transition: height 0.75s ease;
+  -moz-transition: height 0.75s ease;
+  transition: height 0.75s ease;
+  transition-delay: 0.5s;
+}
+.downsidebar {
+  position: absolute;
+  overflow: hidden;
+  height: 10px;
+  bottom: 0;
+  left: 0;
+  right:0px;
+  vertical-align: middle;
+  z-index: 999;
+  /*border-left: 1px #333 solid;*/
+  background-color: #191970;
+  -webkit-transition: height 0.75s ease;
+  -moz-transition: height 0.75s ease;
+  transition: height 0.75s ease;
+  transition-delay: 0.5s;
+}
+.leftsidebar a {
+  position: absolute;
+  overflow: hidden;
+}
+.layerpenl {
+  position: absolute;
+  overflow: hidden;
+  display:none;
+  min-width: 30%;
+  min-height: 40%;
+  bottom: 20px;
+  left: 55px;
+  vertical-align: middle;
+  z-index: 10;
+  border-left: 2px #000 solid;
+  border-right: 2px #000 solid;
+  border-top: 2px #000 solid;
+  border-bottom: 2px #000 solid;
+  background-color: #fff;
+  -webkit-transition: height 0.75s ease;
+  -moz-transition: height 0.75s ease;
+  transition: height 0.75s ease;
+  transition-delay: 0.5s;
+}
+.refresh{
+  background-color:#337ab7;
+  border-left: 2px #337ab7 solid;
+  border-right: 2px #337ab7 solid;
+  border-top: 2px #337ab7 solid;
+  border-bottom: 2px #337ab7 solid;
+}
+.iconinlayer{
+  position: absolute;
+  cursor: pointer;
+  right: 15px;
+  top:15px;
+}
+.editor {
+    position: absolute;
+    top:90px;
+    bottom:50px;
+    left:0px;
+    right:25px;
+    border-right: 1px lightgray solid;
+}

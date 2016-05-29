@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meat charset='utf-8'>
+    <meta http-equiv='x-ua-compatible', content='IE=edge'>
+		<meta name='viewport', content='width=device-width, initial-scale=1'>
+		<meta name='apple-mobile-web-app-capable', content='yes'>
+		<meta name='apple-touch-fullscreen', content='yes'>
+		<title> 高性能制图-地图编辑</title>
+    <link href="{% static "cssjs/sbadmin2/bower_components/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static "cssjs/sbadmin2/bower_components/metisMenu/dist/metisMenu.min.css" %}" rel="stylesheet">
+
+    <!-- Social Buttons CSS -->
+    <link href="{% static "cssjs/sbadmin2/bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static "cssjs/sbadmin2/dist/css/sb-admin-2.css" %}" rel="stylesheet">
+    <link href="{% static "cssjs/mapedit/leaflet/leaflet.css" %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static "cssjs/sbadmin2/bower_components/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "cssjs/mapedit/css/user.css" %}" rel='stylesheet'>
+    <link href="{% static "cssjs/mapedit/css/codemirror.css" %}" rel='stylesheet'>
+
+    <script src="{% static "cssjs/sbadmin2/bower_components/jquery/dist/jquery.min.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "cssjs/sbadmin2/bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static "cssjs/sbadmin2/bower_components/metisMenu/dist/metisMenu.min.js" %}"></script>
+    <script src="{% static "cssjs/mapedit/libs/codemirror/codemirror.js" %}" > </script>
+    <script src="{% static "cssjs/mapedit/libs/codemirror/mode/css.js" %}" ></script>
+    <!--<script src="{% static "cssjs/mapedit/libs/angular-1.2.17/angular.min.js" %}" type="text/javascript"> </script>
+    <script src="{% static "cssjs/mapedit/libs/angular-1.2.17/angular-resource.min.js" %}" type="text/javascript"> </script>
+    <script src="{% static "cssjs/mapedit/libs/angular-1.2.17/angular-route.min.js" %}" type="text/javascript"> </script>-->
+    <script src="{% static "cssjs/mapedit/leaflet/leaflet.js" %}"></script>
+    <script src="{% static "cssjs/minicolorjs/jquery.minicolors.js" %}"></script>
+    <link rel="stylesheet" href="{% static "cssjs/minicolorjs/jquery.minicolors.css" %}">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="glyphicon glyphicon-chevron-left  navbar-brand" href="/main/">返回首页</a>
+  </div>
+</nav>
+<div id="map" calss="map"></div>
+<div id="sidemenu" class="leftsidebar">
+  <a id="layer" class="btn btn-primary btn-circle btn-lg" style="bottom:0px;"><i class="fa fa-list"></i>
+  </a>
+</div>
+<div isopen="closed" id="layerpenl" class="layerpenl">
+     <li class="list-group-item active">图层
+         <i href="#" data-toggle="modal" data-target="#importModal" class="iconinlayer glyphicon glyphicon-plus"></i>
+         <form role="form" style="position:absolute;right:50px;top:12px;"> <button id="refresh"  class=" refresh glyphicon glyphicon-refresh" ></button></form>
+     </li>
+  <ul id="layergroup" class="list-group">
+  </ul>
+</div>
+<div id="sidebar" class="sidebar">
+  <form role="form" method="POST" enctype="multipart/form-data">
+    <ul id="myTab" class="nav nav-tabs">
+       <li class="active"><a href="#mapeditor" data-toggle="tab">mss</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+       <div class="tab-pane fade in active" id="mapeditor">
+         <div  class="alert alert-success">
+             log:{{log}}<a style="position:absolute;right:10px" href="#" class="alert-link">更多信息</a>.
+         </div>
+        <div class="form-group editor "><textarea id="mssStyle" name="mssStyle" >{{mssStyle}}</textarea></div>
+       </div>
+    </div>
+    <div style="position:absolute;right:0px;bottom:0px;height:60px;width:100%;">
+      <button id="subMss" type="submit" class="glyphicon glyphicon-ok btn btn-primary " style="z-index:999;position:absolute;right:25px;top:5px"></button>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="Import Data">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="importModal">添加图层</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+            <div class="form-group input-group">
+                <span class="input-group-addon">图层名称</span>
+                <input id="addlayername" type="text" class="form-control" placeholder="Layername">
+            </div>
+            <div class="form-group input-group">
+                <span class="input-group-addon">图层信息</span>
+                <textarea id="addlayerinfo" type="text" class="form-control" rows="15"></textarea>
+            </div>
+            <button id="addlayer" type="submit" class="btn btn-primary" >提交</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="removelayerModal" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               删除图层
+            </h4>
+         </div>
+         <div class="modal-body">
+           <h4 >确定要删除以下图层吗？<h4 id="removetips"></h4></h4>
+           <form role="form">
+               <button id="removelayer" type="submit" class="btn btn-primary" >确定删除</button>
+           </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+               data-dismiss="modal">取消
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<script src="{% static "cssjs/mapedit/js/csseditor.js" %}" type="text/javascript"> </script>
+<script>
+  map = L.map("map").setView([31.13,104.40], 10);
+  m_layer = L.tileLayer('http://localhost:{{port}}/{{layername}}/{z}/{x}/{y}.png');
+  var layerpanel = function(){
+    if($('#layerpenl').attr('isopen')=='closed')
+    {
+      $('#layerpenl').show("slide");
+      $('#layerpenl').attr('isopen','opened');
+    }
+    else {
+      $('#layerpenl').hide("slide");
+      $('#layerpenl').attr('isopen','closed');
+    }
+    $.ajax({
+      url: "/getLayers/",
+      data:{},
+      type: "POST",
+      dataType:'json',
+      success:function(data){successCallBack(data);},
+      error:function(er){}
+    });
+  };
+  var successCallBack = function(data){
+    $('#layergroup').empty();
+    for(var layer in data)
+    {
+      var text = '<li id="'+data[layer]+'" class="list-group-item">'+data[layer]+'<i href="#" data-toggle="modal" data-target="#removelayerModal" class="iconinlayer glyphicon glyphicon-remove"></i></li>'
+      $('#layergroup').append(text);
+    }
+    $('.iconinlayer.glyphicon.glyphicon-remove').click(function(){
+      var ln = $(this).parent().text();
+      ln = ln.replace(/\s/g,"");
+      //$(this).parent().remove();
+      $('#removetips').text(ln);
+    });
+  };
+  $(document).ready(function() {
+     m_layer.addTo(map);
+     $('.demo').each( function() {
+         //
+         // Dear reader, it's actually very easy to initialize MiniColors. For example:
+         //
+         //  $(selector).minicolors();
+         //
+         // The way I've done it below is just for the demo, so don't get confused
+         // by it. Also, data- attributes aren't supported at this time...they're
+         // only used for this demo.
+         //
+         $(this).minicolors({
+             control: $(this).attr('data-control') || 'hue',
+             defaultValue: $(this).attr('data-defaultValue') || '',
+             format: $(this).attr('data-format') || 'hex',
+             keywords: $(this).attr('data-keywords') || '',
+             inline: $(this).attr('data-inline') === 'true',
+             letterCase: $(this).attr('data-letterCase') || 'lowercase',
+             opacity: $(this).attr('data-opacity'),
+             position: $(this).attr('data-position') || 'bottom left',
+             swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+             change: function(value, opacity) {
+                 if( !value ) return;
+                 if( opacity ) value += ', ' + opacity;
+                 if( typeof console === 'object' ) {
+                     console.log(value);
+                 }
+             },
+             theme: 'bootstrap'
+         });
+
+     });
+    $('#layer').click(function(){layerpanel();});
+    $('#addlayer').click(function(){
+      var aln = $('#addlayername').val();
+      var info = $('#addlayerinfo').val();
+      $.ajax({
+        url: "/modifylayer/1/",
+        data:{addlayerinfo:info},
+        type: "POST",
+        dataType:'json',
+        success:function(data){
+          //m_layer.redraw();
+          //window.location.reload();
+          // map.removeLayer(m_layer);
+          // window.location = window.location.href;
+        },
+        error:function(er){}
+      });
+    });
+    $('#removelayer').click(function(){
+      var ln = $('#removetips').text();
+      $('#'+ln).remove();
+      if(ln!='')
+      {
+        $.ajax({
+          url: "/modifylayer/0/",
+          data:{removelayername:ln},
+          type: "POST",
+          dataType:'json',
+          success:function(data){
+          },
+          error:function(er){}
+        });
+      }
+    });
+  });
+</script>
+</body>
+</html>

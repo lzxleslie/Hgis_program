@@ -1,0 +1,9 @@
+<uwsgi>
+    <socket>:127.0.0.1:8077</socket>
+    <listen>80</listen>
+    <pythonpath>/home/whu/projects/osmdjango</pythonpath>
+    <master>true</master>
+    <module>django_wsgi</module>
+    <processes>8</processes> 
+    <daemonize>uwsgi.log</daemonize>
+</uwsgi>

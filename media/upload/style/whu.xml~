@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="#001420">
+
+<Parameters>
+  <Parameter name="bounds">-180,-85.05112877980659,180,85.05112877980659</Parameter>
+  <Parameter name="center">0,20,3</Parameter>
+  <Parameter name="format">png</Parameter>
+  <Parameter name="minzoom">0</Parameter>
+  <Parameter name="maxzoom">8</Parameter>
+  <Parameter name="name"><![CDATA[Control Room]]></Parameter>
+</Parameters>
+
+<FontSet name="fontset-0">
+  <Font face-name="Droid Sans Book"/>
+  <Font face-name="Arial Regular"/>
+  <Font face-name="DejaVu Sans Book"/>
+</FontSet>
+<FontSet name="fontset-1">
+  <Font face-name="Droid Sans Bold"/>
+  <Font face-name="Arial Bold"/>
+  <Font face-name="DejaVu Sans Bold"/>
+</FontSet>
+<Style name="land" filter-mode="first">
+  <Rule>
+    <PolygonSymbolizer fill="#0a202a" gamma="0.7" />
+  </Rule>
+</Style>
+<Style name="land-glow-outer" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <LineSymbolizer stroke="#225160" stroke-width="5" stroke-linejoin="round" stroke-opacity="0.05" />
+  </Rule>
+</Style>
+<Style name="land-glow-outermiddle" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <LineSymbolizer stroke="#225160" stroke-width="5" stroke-linejoin="round" stroke-opacity="0.1" />
+  </Rule>
+</Style>
+<Style name="land-glow-innermiddle" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>200000000</MaxScaleDenominator>
+    <LineSymbolizer stroke="#225160" stroke-width="2.5" stroke-linejoin="round" stroke-opacity="0.2" />
+  </Rule>
+</Style>
+<Style name="land-glow-inner" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>500000000</MaxScaleDenominator>
+    <LineSymbolizer stroke="#225150" stroke-width="1.2" stroke-linejoin="round" stroke-opacity="0.4" />
+  </Rule>
+</Style>
+<Layer name="land"
+  srs="">
+    <StyleName>land-glow-inner</StyleName>
+    <StyleName>land-glow-innermiddle</StyleName>
+    <StyleName>land-glow-outermiddle</StyleName>
+    <StyleName>land-glow-outer</StyleName>
+    <StyleName>land</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/physical/10m-land.zip]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="urban" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <PolygonSymbolizer fill="#99ff66" fill-opacity="0.66" />
+    <LineSymbolizer stroke-width="1.2" stroke="#99ff66" stroke-opacity="0.33" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <PolygonSymbolizer fill="#99ff66" fill-opacity="0.66" />
+    <LineSymbolizer stroke-width="1" stroke="#99ff66" stroke-opacity="0.33" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <PolygonSymbolizer fill="#99ff66" fill-opacity="0.66" />
+    <LineSymbolizer stroke-width="0.8" stroke="#99ff66" stroke-opacity="0.33" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>25000000</MinScaleDenominator>
+    <PolygonSymbolizer fill="#99ff66" fill-opacity="0.66" />
+    <LineSymbolizer stroke-width="0.6" stroke="#99ff66" stroke-opacity="0.33" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000000</MaxScaleDenominator>
+    <MinScaleDenominator>50000000</MinScaleDenominator>
+    <PolygonSymbolizer fill="#99ff66" fill-opacity="0.66" />
+    <LineSymbolizer stroke-width="0.4" stroke="#99ff66" stroke-opacity="0.33" />
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>100000000</MinScaleDenominator>
+    <PolygonSymbolizer fill="#99ff66" fill-opacity="0.66" />
+    <LineSymbolizer stroke="#99ff66" stroke-opacity="0.33" />
+  </Rule>
+</Style>
+<Layer name="urban"
+  srs="">
+    <StyleName>urban</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/cultural/10m-urban-areas.zip]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="lakes" filter-mode="first">
+  <Rule>
+    <PolygonSymbolizer fill="#001420" />
+  </Rule>
+</Style>
+<Layer name="lakes"
+  srs="">
+    <StyleName>lakes</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/physical/10m-lakes.zip]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="geo-lines" filter-mode="first">
+  <Rule>
+    <Filter>([ScaleRank] &lt; 10)</Filter>
+    <LineSymbolizer stroke="#bb22aa" stroke-dasharray="1, 4" stroke-opacity="0.8" stroke-width="0.25" stroke-gamma="0.2" />
+  </Rule>
+</Style>
+<Layer name="geo-lines"
+  srs="">
+    <StyleName>geo-lines</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/physical/10m-geographic-lines.zip]]></Parameter>
+       <Parameter name="id"><![CDATA[geo-lines]]></Parameter>
+       <Parameter name="project"><![CDATA[control-room]]></Parameter>
+       <Parameter name="srs"><![CDATA[null]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="international_boundaries" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <LineSymbolizer stroke-width="1.6" stroke="#00aaff" stroke-dasharray="1, 1" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="1.4" stroke="#00aaff" stroke-dasharray="1, 1" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="1.2" stroke="#00aaff" stroke-dasharray="1, 1" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="1" stroke="#00aaff" stroke-dasharray="1, 1" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.8" stroke="#00aaff" stroke-dasharray="1, 1" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>25000000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.6" stroke="#00aaff" stroke-dasharray="1, 1" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>200000000</MaxScaleDenominator>
+    <MinScaleDenominator>50000000</MinScaleDenominator>
+    <LineSymbolizer stroke="#00aaff" stroke-dasharray="1, 1" stroke-width="0.5" />
+  </Rule>
+</Style>
+<Layer name="international_boundaries"
+  srs="">
+    <StyleName>international_boundaries</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/cultural/10m-admin-0-boundary-lines-land.zip]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="map-units" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <LineSymbolizer stroke-width="1.2" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="1" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.8" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.6" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.5" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+</Style>
+<Layer name="map-units"
+  srs="">
+    <StyleName>map-units</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/cultural/10m-admin-0-boundary-lines-map-units.zip]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="subnational_boundaries" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Canada')</Filter>
+    <LineSymbolizer stroke-width="1.2" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Canada')</Filter>
+    <LineSymbolizer stroke-width="1" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Canada')</Filter>
+    <LineSymbolizer stroke-width="0.8" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Canada')</Filter>
+    <LineSymbolizer stroke-width="0.6" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Canada')</Filter>
+    <LineSymbolizer stroke-width="0.5" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>25000000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Canada')</Filter>
+    <LineSymbolizer stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" stroke-width="0.4" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'US')</Filter>
+    <LineSymbolizer stroke-width="1.2" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'US')</Filter>
+    <LineSymbolizer stroke-width="1" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'US')</Filter>
+    <LineSymbolizer stroke-width="0.8" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'US')</Filter>
+    <LineSymbolizer stroke-width="0.6" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'US')</Filter>
+    <LineSymbolizer stroke-width="0.5" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>25000000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'US')</Filter>
+    <LineSymbolizer stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" stroke-width="0.4" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Australia')</Filter>
+    <LineSymbolizer stroke-width="1.2" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Australia')</Filter>
+    <LineSymbolizer stroke-width="1" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Australia')</Filter>
+    <LineSymbolizer stroke-width="0.8" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Australia')</Filter>
+    <LineSymbolizer stroke-width="0.6" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Australia')</Filter>
+    <LineSymbolizer stroke-width="0.5" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>25000000</MinScaleDenominator>
+    <Filter>([COUNTRYNAM] = 'Australia')</Filter>
+    <LineSymbolizer stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" stroke-width="0.4" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <LineSymbolizer stroke-width="1.2" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="1" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.8" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.6" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="0.5" stroke="#00aaff" stroke-dasharray="4, 2" stroke-opacity="0.2" />
+  </Rule>
+</Style>
+<Layer name="subnational_boundaries"
+  srs="">
+    <StyleName>subnational_boundaries</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/cultural/10m-admin-1-states-provinces-lines.zip]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="country-labels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <TextSymbolizer size="16" character-spacing="3" fontset-name="fontset-0" fill="#7d88a3" text-transform="uppercase" wrap-width="40" line-spacing="2" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <TextSymbolizer size="14" character-spacing="2" fontset-name="fontset-0" fill="#7d88a3" text-transform="uppercase" wrap-width="40" line-spacing="2" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <TextSymbolizer size="12" character-spacing="1" fontset-name="fontset-0" fill="#7d88a3" text-transform="uppercase" wrap-width="40" line-spacing="2" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <TextSymbolizer size="11" fontset-name="fontset-0" fill="#7d88a3" text-transform="uppercase" character-spacing="1" wrap-width="40" line-spacing="2" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <TextSymbolizer fontset-name="fontset-0" fill="#7d88a3" size="10" text-transform="uppercase" character-spacing="1" wrap-width="40" line-spacing="2" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAME]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="country-labels"
+  srs="">
+    <StyleName>country-labels</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/cultural/10m-admin-0-country-points.zip]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="cities" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <Filter>([SCALERANK] = 10)</Filter>
+    <TextSymbolizer size="14" character-spacing="1" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>750000</MaxScaleDenominator>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 10)</Filter>
+    <TextSymbolizer size="13" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <MinScaleDenominator>750000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 10)</Filter>
+    <TextSymbolizer size="12" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 10)</Filter>
+    <TextSymbolizer fontset-name="fontset-1" fill="#88eeff" size="9" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <Filter>([SCALERANK] = 9)</Filter>
+    <TextSymbolizer size="14" character-spacing="1" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>750000</MaxScaleDenominator>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 9)</Filter>
+    <TextSymbolizer size="13" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <MinScaleDenominator>750000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 9)</Filter>
+    <TextSymbolizer size="13" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 9)</Filter>
+    <TextSymbolizer size="11" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <Filter>([SCALERANK] = 8)</Filter>
+    <TextSymbolizer size="14" character-spacing="1" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>750000</MaxScaleDenominator>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 8)</Filter>
+    <TextSymbolizer size="14" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <MinScaleDenominator>750000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 8)</Filter>
+    <TextSymbolizer size="13" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 8)</Filter>
+    <TextSymbolizer size="12" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 8)</Filter>
+    <TextSymbolizer fontset-name="fontset-1" fill="#88eeff" size="9" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <Filter>([SCALERANK] = 7)</Filter>
+    <TextSymbolizer size="15" character-spacing="2" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>750000</MaxScaleDenominator>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 7)</Filter>
+    <TextSymbolizer size="14" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <MinScaleDenominator>750000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 7)</Filter>
+    <TextSymbolizer size="14" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 7)</Filter>
+    <TextSymbolizer size="13" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 7)</Filter>
+    <TextSymbolizer size="11" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <Filter>([SCALERANK] = 6)</Filter>
+    <TextSymbolizer size="15" character-spacing="2" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>750000</MaxScaleDenominator>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 6)</Filter>
+    <TextSymbolizer size="15" character-spacing="1" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <MinScaleDenominator>750000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 6)</Filter>
+    <TextSymbolizer size="14" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 6)</Filter>
+    <TextSymbolizer size="13" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 6)</Filter>
+    <TextSymbolizer size="11" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 6)</Filter>
+    <TextSymbolizer fontset-name="fontset-1" fill="#88eeff" size="9" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <Filter>([SCALERANK] = 5)</Filter>
+    <TextSymbolizer size="15" character-spacing="2" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>750000</MaxScaleDenominator>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 5)</Filter>
+    <TextSymbolizer size="15" character-spacing="1" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <MinScaleDenominator>750000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 5)</Filter>
+    <TextSymbolizer size="15" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 5)</Filter>
+    <TextSymbolizer size="14" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 5)</Filter>
+    <TextSymbolizer size="12" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 5)</Filter>
+    <TextSymbolizer size="11" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <Filter>([SCALERANK] = 4)</Filter>
+    <TextSymbolizer size="16" character-spacing="3" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>750000</MaxScaleDenominator>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 4)</Filter>
+    <TextSymbolizer size="15" character-spacing="1" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <MinScaleDenominator>750000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 4)</Filter>
+    <TextSymbolizer size="15" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 4)</Filter>
+    <TextSymbolizer size="14" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 4)</Filter>
+    <TextSymbolizer size="13" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 4)</Filter>
+    <TextSymbolizer size="12" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 4)</Filter>
+    <TextSymbolizer size="11" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <Filter>([SCALERANK] = 3)</Filter>
+    <TextSymbolizer size="16" character-spacing="3" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>750000</MaxScaleDenominator>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 3)</Filter>
+    <TextSymbolizer size="16" character-spacing="2" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <MinScaleDenominator>750000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 3)</Filter>
+    <TextSymbolizer size="16" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 3)</Filter>
+    <TextSymbolizer size="15" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 3)</Filter>
+    <TextSymbolizer size="14" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 3)</Filter>
+    <TextSymbolizer size="13" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([SCALERANK] = 3)</Filter>
+    <TextSymbolizer size="12" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <Filter>([SCALERANK] &lt; 3)</Filter>
+    <TextSymbolizer size="16" character-spacing="3" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>750000</MaxScaleDenominator>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([SCALERANK] &lt; 3)</Filter>
+    <TextSymbolizer size="16" character-spacing="2" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <MinScaleDenominator>750000</MinScaleDenominator>
+    <Filter>([SCALERANK] &lt; 3)</Filter>
+    <TextSymbolizer size="16" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>3000000</MaxScaleDenominator>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([SCALERANK] &lt; 3)</Filter>
+    <TextSymbolizer size="15" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>6500000</MaxScaleDenominator>
+    <MinScaleDenominator>3000000</MinScaleDenominator>
+    <Filter>([SCALERANK] &lt; 3)</Filter>
+    <TextSymbolizer size="15" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500000</MaxScaleDenominator>
+    <MinScaleDenominator>6500000</MinScaleDenominator>
+    <Filter>([SCALERANK] &lt; 3)</Filter>
+    <TextSymbolizer size="14" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000000</MaxScaleDenominator>
+    <MinScaleDenominator>12500000</MinScaleDenominator>
+    <Filter>([SCALERANK] &lt; 3)</Filter>
+    <TextSymbolizer size="13" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000000</MaxScaleDenominator>
+    <MinScaleDenominator>25000000</MinScaleDenominator>
+    <Filter>([SCALERANK] &lt; 3)</Filter>
+    <TextSymbolizer size="12" fontset-name="fontset-1" fill="#88eeff" halo-radius="2" halo-fill="rgba(0, 0, 0, 0.75)" ><![CDATA[[NAMEASCII]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="cities"
+  srs="">
+    <StyleName>cities</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/cultural/10m-populated-places-simple.zip]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>
