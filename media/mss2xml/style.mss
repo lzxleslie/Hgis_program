@@ -33,7 +33,7 @@
 @shengdao_color:lighten(rgb(215,194,158),1);
 
 Map {
-  background-color: #fff;
+  background-color:rgb(255, 255, 255);
   buffer-size:256;
 }
 

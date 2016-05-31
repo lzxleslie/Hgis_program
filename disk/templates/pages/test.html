@@ -34,7 +34,9 @@
     <script src="{% static "cssjs/sbadmin2/bower_components/metisMenu/dist/metisMenu.min.js" %}"></script>
     <script src="{% static "cssjs/mapedit/libs/codemirror/codemirror.js" %}" > </script>
     <script src="{% static "cssjs/mapedit/libs/codemirror/mode/css.js" %}" ></script>
-
+    <!--<script src="{% static "cssjs/mapedit/libs/angular-1.2.17/angular.min.js" %}" type="text/javascript"> </script>
+    <script src="{% static "cssjs/mapedit/libs/angular-1.2.17/angular-resource.min.js" %}" type="text/javascript"> </script>
+    <script src="{% static "cssjs/mapedit/libs/angular-1.2.17/angular-route.min.js" %}" type="text/javascript"> </script>-->
     <script src="{% static "cssjs/mapedit/leaflet/leaflet.js" %}"></script>
     <script src="{% static "cssjs/minicolorjs/jquery.minicolors.js" %}"></script>
     <link rel="stylesheet" href="{% static "cssjs/minicolorjs/jquery.minicolors.css" %}">
@@ -43,11 +45,48 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="navbar-header">
       <a class="glyphicon glyphicon-chevron-left  navbar-brand" href="/main/">返回首页</a>
+      <div style="position:absolute;right:10px;top:10px" >
+        <button type="button" id='sideopen1' class="btn btn-primary "><i class="fa fa-list "></i>
+        </button>
+      </div>
+      <div id="buttons" style="position:absolute;right:10px;top:10px" >
+        <button type="button" id='sideopen' class="btn btn-primary "><i class="fa fa-list"></i>
+        </button>
+        <button type="button" class="btn btn-warning "><i class="fa fa-pencil"></i>
+        </button>
+        <button type="button" class="btn btn-danger "><i class="fa fa-trash-o "></i>
+        </button>
+        <button type="button"  class="btn btn-info"><i class="fa fa-lock "></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="fa fa-flag"></i>
+        </button>
+        <button type="button" class="btn btn-success "><i class="fa fa-camera"></i>
+        </button>
+        <button type="button" id='submitMss' class="btn btn-info "><i class="fa fa-check"></i>
+        </button>
+        <button type="button" class="btn btn-warning "><i class="fa fa-wrench"></i>
+        </button>
+        <button type="button" class="btn btn-danger "><i class="fa fa-heart"></i>
+        </button>
+        <button type="button" class="btn btn-info"><i class="fa fa-check"></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="fa fa-list"></i>
+        </button>
+        <button type="button" class="btn btn-success "><i class="fa fa-link"></i>
+        </button>
+        <button type="button" class="btn btn-info "><i class="fa fa-check"></i>
+        </button>
+        <button type="button" class="btn btn-warning "><i class="fa fa-times"></i>
+        </button>
+        <button type="button" class="btn btn-danger "><i class="fa fa-heart"></i>
+        </button>
+      </div>
+
   </div>
 </nav>
 <div id="map" calss="map"></div>
 <div id="sidemenu" class="leftsidebar">
-  <a id="layer" class="btn btn-primary btn-circle btn-lg" style="bottom:0px;"><i class="fa fa-list"></i>
+  <a id="layer" style="bottom:0px;" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-list"></i>
   </a>
 </div>
 <div isopen="closed" id="layerpenl" class="layerpenl">
@@ -58,7 +97,7 @@
   <ul id="layergroup" class="list-group">
   </ul>
 </div>
-<div id="sidebar" class="sidebar">
+<div  id="sidebar" class="sidebar">
   <form id="editorform" role="form" method="POST" enctype="multipart/form-data">
     <ul id="myTab" class="nav nav-tabs">
        <li class="active"><a href="#mapeditor" data-toggle="tab">mss</a></li>
@@ -134,15 +173,9 @@
   map = L.map("map").setView([31.13,104.40], 10);
   m_layer = L.tileLayer('http://localhost:{{port}}/{{layername}}/{z}/{x}/{y}.png');
   var layerpanel = function(){
-    if($('#layerpenl').attr('isopen')=='closed')
-    {
-      $('#layerpenl').show("slide");
-      $('#layerpenl').attr('isopen','opened');
-    }
-    else {
-      $('#layerpenl').hide("slide");
-      $('#layerpenl').attr('isopen','closed');
-    }
+    $('#layerpenl').fadeToggle();
+  };
+  var GetLayers = function(){
     $.ajax({
       url: "/getLayers/",
       data:{},
@@ -167,6 +200,14 @@
     });
   };
   $(document).ready(function() {
+    $('#sideopen,#sideopen1').click(function(){
+      $('#sidebar').animate({width:'toggle'});
+      $('#buttons').fadeToggle();;
+    });
+    $('#submitMss').click(function(){
+      $('#editorform').submit();
+    })
+     GetLayers();
      m_layer.addTo(map);
      L.control.scale({metric:true,position:'bottomleft',imperial:false}).addTo(map);
     $('#layer').click(function(){layerpanel();});

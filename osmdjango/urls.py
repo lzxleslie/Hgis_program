@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^table/$','disk.views.datapage',name='datatable'),
     url(r'^table/(\w+)$','disk.views.table',name='datatable'),
     url(r'^tilelistbyregion', 'disk.views.tilelistbyregion'),
-    url(r'^/?(?P<layer>\w.+)/(?P<z>\d+)/(?P<y>\d+)/(?P<x>\d+)\.(?P<extension>\w+)$', 'disk.views.tile', name='tile'),     
+    url(r'^(\w+)/(\d+)/(\d+)/(\d+).(\w+)/$', 'disk.views.tile', name='tile'),     
     url(r'^admin/', include(admin.site.urls)),
 ]
 urlpatterns += staticfiles_urlpatterns()  

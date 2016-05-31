@@ -87,6 +87,7 @@ def mapEdit(request,layername):
     CFG = TileStache.Config.buildConfiguration(TILECONFIG)
     mssStyle=open('media/mss2xml/save.mss').read()
     log = ""
+    print request.method
     if request.method == "POST":
         print "caocaocao"
         mssStyle = request.POST['mssStyle']       
@@ -100,7 +101,7 @@ def mapEdit(request,layername):
     port = '8888'
     if(layername==request.user.username):
         port='8000'
-    return render(request, 'pages/mapedit.html',{'layername':layername,'mssStyle':mssStyle,'log':log,'port':port,'isopen':'closed','display':'none'})
+    return render(request, 'pages/test.html',{'layername':layername,'mssStyle':mssStyle,'log':log,'port':port,'isopen':'closed','display':'none'})
 def getLayersFromMml(request):
     mmlfile=open('media/mss2xml/project.mml')
     mml=json.load(mmlfile)
@@ -113,6 +114,7 @@ def getLayersFromMml(request):
 def modifyLayer(request,modify_type):
     mml=json.load(open('media/mss2xml/project.mml','r'))
     if modify_type=='0':
+        print ('111')
         if request.POST:
             removelayer = request.POST['removelayername']
             i=0
@@ -124,10 +126,14 @@ def modifyLayer(request,modify_type):
                 i=i+1
     if modify_type=='1':
         if request.POST :
+            addtype =request.POST['addType'] 
             info= request.POST['addlayerinfo']
             info = json.loads(info)
             print info
-            mml['Layer'].extend(info)
+            if(addtype=='single'):
+                mml['Layer'].append(info)
+            elif(addtype=='multi'):
+                mml['Layer'].extend(info)
     json.dump(mml,open('media/mss2xml/project.mml','w')) 
     commands.getstatusoutput('cd /home/whu/projects/osmdjango/media/mss2xml&&node mss2xml.js')    
 def table(request,tablename):
