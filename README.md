@@ -2,7 +2,7 @@
  在线制图网站的开发
 
  1.登录
-![image](https://raw.githubusercontent.com/lzxleslie/Hgis_program/master/webScreenShots/%E9%A6%96%E9%A1%B5.png)
+![image](https://github.com/lzxleslie/Hgis_program/blob/master/webScreenShots/%E7%99%BB%E9%99%86.png)
  2.主页
 ![image](https://github.com/lzxleslie/Hgis_program/raw/master/webScreenShots/首页.png)
  3.OSM
