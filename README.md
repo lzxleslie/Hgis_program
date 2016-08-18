@@ -1,6 +1,6 @@
 # Hgis_program
 在线制图网站的开发
-![image](https://github.com/lzxleslie/Hgis_program/raw/master/webScreenShots/登录.png)
+![image](https://github.com/lzxleslie/Hgis_program/blob/master/webScreenShots/登录.png)
 ![image](https://github.com/lzxleslie/Hgis_program/raw/master/webScreenShots/首页.png)
 ![image](https://github.com/lzxleslie/Hgis_program/raw/master/webScreenShots/osm.png)
 ![image](https://github.com/lzxleslie/Hgis_program/raw/master/webScreenShots/查看数据.png)
