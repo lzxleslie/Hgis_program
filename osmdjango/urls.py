@@ -28,9 +28,12 @@ urlpatterns = [
     url(r'^getLayers/$','disk.views.getLayersFromMml'),
     url(r'^modifylayer/(\d+)/$','disk.views.modifyLayer'),
     url(r'^table/$','disk.views.datapage',name='datatable'),
-    url(r'^table/(\w+)$','disk.views.table',name='datatable'),
+    url(r'^table/(\d+)/$','disk.views.table',name='datatable'),
     url(r'^tilelistbyregion', 'disk.views.tilelistbyregion'),
-    url(r'^(\w+)/(\d+)/(\d+)/(\d+).(\w+)/$', 'disk.views.tile', name='tile'),     
+    url(r'^(\w+)/(\d+)/(\d+)/(\d+).(\w+)/$', 'disk.views.tile', name='tile'),  
+    url(r'^angular_test/$','disk.views.angular',name='map'),
+    url(r'^huibiao_test/$','disk.views.huibiao'),
+    url(r'^map_Template/(\w+)/$','disk.views.getMssTemplate'),
     url(r'^admin/', include(admin.site.urls)),
 ]
 urlpatterns += staticfiles_urlpatterns()  

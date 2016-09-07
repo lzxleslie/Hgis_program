@@ -6,9 +6,9 @@
     var ctrl = mac ? "Cmd-" : "Ctrl-";
     cmds[map[ctrl + "Up"] = "godocstart"] = function(cm){cm.execCommand("goDocStart");};
     cmds[map[ctrl + "Down"] = "godocend"] = function(cm){cm.execCommand("goDocEnd");};
-    cmds[map[ctrl + "S"] = "submit"] = function(cm){$('#editorform').submit();};
+    cmds[map[ctrl + "S"] = "submit"] = function(cm){$('#editorform').submit();window.localStorage['mssjson'] = JSON.stringify(mssInfo);codeMirror.setValue(jsonObjToMss(mssInfo));};
     var txtArea = document.getElementById('mssStyle');
-    var codeMirror = CodeMirror.fromTextArea(txtArea, {
+    codeMirror = CodeMirror.fromTextArea(txtArea, {
         mode: "css",
         styleActiveLine: true,
         lineWrapping:true,
@@ -17,51 +17,45 @@
         lineNumbers: true,
         smartIndent: true,
         tabSize: 2,
-        autoMatchParens: true
+        autoMatchParens: true,
+        theme:'default',
+        matchBrackets: true
     });
-     //codeMirror.on('cursorActivity', function (a) {
-        //console.log(a.cursorCoords());
-        //$('#colorpicker').css(a.cursorCoords());
-     //});
-     $('.demo').each( function() {
-         //
-         // Dear reader, it's actually very easy to initialize MiniColors. For example:
-         //
-         //  $(selector).minicolors();
-         //
-         // The way I've done it below is just for the demo, so don't get confused
-         // by it. Also, data- attributes aren't supported at this time...they're
-         // only used for this demo.
-         //
-         $(this).minicolors({
-             control: $(this).attr('data-control') || 'hue',
-             defaultValue: $(this).attr('data-defaultValue') || '',
-             format: $(this).attr('data-format') || 'hex',
-             keywords: $(this).attr('data-keywords') || '',
-             inline: $(this).attr('data-inline') === 'true',
-             letterCase: $(this).attr('data-letterCase') || 'lowercase',
-             opacity: $(this).attr('data-opacity'),
-             position: $(this).attr('data-position') || 'bottom left',
-             swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
-             change: function(value, opacity) {
-                 if( !value ) return;
-                 if( opacity ) value += ', ' + opacity;
-                 if( typeof console === 'object' ) {
-                     //console.log(value);
-                 }
-             },
-             theme: 'bootstrap'
-         });
-         $(this).keydown(function(event){
-           if(event.which==13)
-           {
-             //var cur = codeMirror.getCursor();
-             var value = $(this).val();
-             if(codeMirror.somethingSelected())
-             {
-               codeMirror.replaceSelection(value);
-             }
-           }
-         });
+    $('input').bind("input propertychange",function(){
+      console.log('change');
+      uiTocode_3($(this).attr('geotype'));
+      console.log(JSON.stringify(mssInfo));
+      codeMirror.setValue(jsonObjToMss(mssInfo));
+      // $('#mssStyle').text();
+    });
+    $('.color_picker').each( function() {
+      var thisInput = $(this);
+      thisInput.ColorPicker({
+            onSubmit: function(hsb, hex, rgb, el) {
+              $(el).val(hex);
+              $(el).ColorPickerHide();
+            },
+            onBeforeShow: function () {
+              $(this).ColorPickerSetColor(this.value);
+            },
+            onChange: function (hsb, hex, rgb) {
+              thisInput.val('rgb('+rgb.r+','+rgb.g+','+rgb.b+')');
+              uiTocode_3(thisInput.attr('geotype'));
+
+              codeMirror.setValue(jsonObjToMss(mssInfo));
+              console.log(JSON.stringify(mssInfo));
+            }
+          })
+    });
+     $(this).keydown(function(event){
+       if(event.which==13)
+       {
+         //var cur = codeMirror.getCursor();
+         var value = $(this).val();
+         if(codeMirror.somethingSelected())
+         {
+           codeMirror.replaceSelection(value);
+         }
+       }
      });
 })();

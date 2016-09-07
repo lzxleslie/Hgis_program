@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<link href="/home/whu/projects/osmdjango/static/cssjs/sbadmin2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/home/whu/projects/osmdjango/static/cssjs/sbadmin2/dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="/home/whu/projects/osmdjango/static/cssjs/sbadmin2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<script src="/home/whu/projects/osmdjango/static/cssjs/sbadmin2/bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/home/whu/projects/osmdjango/static/cssjs/sbadmin2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="/home/whu/projects/osmdjango/static/cssjs/minicolorjs/jquery.minicolors.js"></script>
+<link rel="stylesheet" href="/home/whu/projects/osmdjango/static/cssjs/minicolorjs/jquery.minicolors.css">
+<style>
+#left{
+  position: absolute;
+  top:0px;
+  left: 0px;
+  right:50%;
+  bottom: 0px;
+  border-right: 2px #000 solid;
+}
+#right{
+  position: absolute;
+  left: 50%;
+  right:0;
+  top:0px;
+  bottom: 0px;
+  border-left: 2px #000 solid;
+}
+</style>
+</head>
+<body>
+  <div ng-app="editor" ng-controller = "Editer" id="left">
+    <div style="position:absolute; width:40%; top:0px; bottom:0px;background-color:white">
+      <div class="panel-heading" style="background-color:#222;">
+          <i class="fa fa-fw"></i>
+      </div>
+      <div id='editlayers' class="list-group">
+        <a href="#" class="list-group-item" ng-repeat="l in layers">
+            <i class="fa fa-tasks fa-fw"> </i>{{l.name}}
+            <span class="pull-right text-muted small"><em>{{l.geomerty}}</em>
+            </span>
+        </a>
+      </div>
+    </div>
+    <div id='layersuieditor'  style="position:absolute;left:40%;top:0px;bottom:0px;background-color:white;width:60%;border-left: 2px #000 solid;">
+      <span id='activelayer' class="input-group-addon">Active Layer : </span>
+      <div id="polygon" class="panel panel-default" style="display:none">
+          <div class="panel-heading">
+              面-边界
+          </div>
+          <div class="panel-body">
+            <div class="form-group input-group">
+                <span class="input-group-addon">线宽</span>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="form-group input-group">
+                <span class="input-group-addon">颜色</span>
+                <input type="text" id="position-bottom-left" class="form-control demo" data-position="bottom left" value="#0088cc">
+            </div>
+          </div>
+          <div class="panel-heading">
+              面-填充
+          </div>
+          <div class="panel-body">
+            <div class="form-group input-group">
+                <span class="input-group-addon">颜色</span>
+                <input type="text" id="position-bottom-left" class="form-control demo" data-position="bottom left" value="#0088cc">
+            </div>
+            <div class="form-group input-group">
+                <span class="input-group-addon">透明度</span>
+               <input type="text" class="form-control" placeholder="">
+            </div>
+          </div>
+          <!-- /.panel-body -->
+      </div>
+      <div id="line" class="panel panel-default" style="display:none">
+          <div class="panel-heading">
+              线
+          </div>
+          <div class="panel-body">
+            <div class="form-group input-group">
+                <span class="input-group-addon">线宽</span>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="form-group input-group">
+                <span class="input-group-addon">颜色</span>
+                <input type="text" id="position-bottom-left" class="form-control demo" data-position="bottom left" value="#0088cc">
+            </div>
+          </div>
+      </div>
+      <div id="point" class="panel panel-default" style="display:none">
+          <div class="panel-heading">
+              点
+          </div>
+          <div class="panel-body">
+            <div class="form-group input-group">
+                <span class="input-group-addon">样式</span>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="form-group input-group">
+                <span class="input-group-addon">颜色</span>
+                <input type="text" id="position-bottom-left" class="form-control demo" data-position="bottom left" value="#0088cc">
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div ng-app = "mss" ng-controller = "Mss" id = "right"></div>
+  <script>
+  $('.demo').each( function() {
+      //
+      // Dear reader, it's actually very easy to initialize MiniColors. For example:
+      //
+      //  $(selector).minicolors();
+      //
+      // The way I've done it below is just for the demo, so don't get confused
+      // by it. Also, data- attributes aren't supported at this time...they're
+      // only used for this demo.
+      //
+      $(this).minicolors({
+          control: $(this).attr('data-control') || 'hue',
+          defaultValue: $(this).attr('data-defaultValue') || '',
+          format: $(this).attr('data-format') || 'hex',
+          keywords: $(this).attr('data-keywords') || '',
+          inline: $(this).attr('data-inline') === 'true',
+          letterCase: $(this).attr('data-letterCase') || 'lowercase',
+          opacity: $(this).attr('data-opacity'),
+          position: $(this).attr('data-position') || 'bottom left',
+          swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+          change: function(value, opacity) {
+              if( !value ) return;
+              if( opacity ) value += ', ' + opacity;
+              if( typeof console === 'object' ) {
+                  //console.log(value);
+              }
+          },
+          theme: 'bootstrap'
+      });
+  });
+  var app = angular.module("editor", []);
+  var data = [{"geometry": "linestring", "name": "hydl", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,hydc,name,geom from hydl where gid is not null)as hydl", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "polygon", "name": "resa", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,geom from resa where gid is not null)as resa", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "polygon", "name": "hfca", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,geom from hfca where gid is not null)as hfca", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "linestring", "name": "hfcl", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,name,geom from hfcl where gid is not null)as hfcl", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "polygon", "name": "vega", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,geom from vega where gid is not null)as vega", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "linestring", "name": "resl", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,geom from resl where gid is not null)as resl", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "linestring", "name": "lrdl_1", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,rn,name,rteg,bianhao,geom from lrdl_1 where gid is not null)as lrdl_1", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "linestring", "name": "lrrl", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,rn,name,geom from lrrl where gid is not null)as lrrl", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "linestring", "name": "hydl_lable", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,hydc,name,geom from hydl where gid is not null)as hydl_lable", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "polygon", "name": "hyda_lable", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,gb,hydc,name,wql,geom from hyda where gid is not null)as hyda_lable", "password": "whu", "type": "postgis", "key_field": ""}}, {"geometry": "point", "name": "agnp_lable", "Datasource": {"extent_cache": "dynamic", "geometry_field": "", "dbname": "shape", "port": "5432", "host": "localhost", "user": "postgres", "extent": "", "table": "(select gid,class,name,geom from agnp where gid is not null)as agnp_lable", "password": "whu", "type": "postgis", "key_field": ""}}];
+  app.controller("Editer", function($scope) {
+    $scope.layers = data;
+  });
+</script>
+</body>
+</html>

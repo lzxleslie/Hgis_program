@@ -17,7 +17,7 @@ if (!existsSync(input)) {
     process.exit(1);
 }
 else {
-  //console.log(input);
+//  console.log(input);
 }
 
 function compileMML(err, data) {

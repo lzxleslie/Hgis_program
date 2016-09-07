@@ -63,9 +63,9 @@
                     <ul id="navul" class="nav" id="side-menu">
                         <li  class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="SQL...">
+                                <input id="sql" type="text" class="form-control" placeholder="SQL...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button id="search" class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -140,11 +140,21 @@
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
+    var getSql = function(m_sql){
+      $.ajax({
+        url: "/table/1/",
+        data:{sql:m_sql},
+        type: "POST",
+        dataType:'json',
+        success:function(data){successCallBack(data);},
+        error:function(er){alert("fail")}
+      });
+    };
     var getTable=function(tablename){
       tablename = tablename.replace(/\s/g,"");
       $.ajax({
-        url: "/table/"+tablename,
-        data:{},
+        url: "/table/0/",
+        data:{sql:tablename},
         type: "POST",
         dataType:'json',
         success:function(data){successCallBack(data);},
@@ -174,6 +184,11 @@
         $(".table_name").click(function(){
            $('#actiTbName').text($(this).text());
            getTable($(this).text());
+        });
+        $("#search").click(function(){
+          var sql = $('#sql').val();
+          $('#actiTbName').text(sql);
+          getSql(sql);
         });
     });
     </script>

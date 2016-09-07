@@ -17,7 +17,7 @@ if (!existsSync(input)) {
     process.exit(1);
 }
 else {
-  //console.log(input);
+//  console.log(input);
 }
 
 function compileMML(err, data) {
@@ -43,8 +43,8 @@ function compileMML(err, data) {
         }
         process.exit(1);
     }
-    fs.writeFile('test.xml',output,'utf-8');
-    console.log('SUCCESS');
+    fs.writeFile('../upload/style/whu.xml',output,'utf-8');
+    console.log(output);
 };
 try {
     var data = fs.readFileSync(input, 'utf-8');

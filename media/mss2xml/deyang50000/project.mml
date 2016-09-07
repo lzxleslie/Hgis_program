@@ -1,0 +1,620 @@
+{
+  "bounds": [
+    -180,
+    -85.05112877980659,
+    180,
+    85.05112877980659
+  ],
+  "center": [
+    0,
+    0,
+    2
+  ],
+  "format": "png8",
+  "interactivity": false,
+  "minzoom": 0,
+  "maxzoom": 22,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "geometry": "linestring",
+      "extent": [
+        103.794715683621,
+        30.5282176060006,
+        105.171787403,
+        31.690278917584
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,hydc,name,geom from hydl where gid is not null)as hydl",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "hydl",
+        "project": "national_s",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "hydl",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hydl"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        103.800315924542,
+        30.5280005993205,
+        105.170105354,
+        31.700521400651
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,rn,name,rteg,geom from lrdl where gid is not null)as lrdl",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "lrdl",
+        "project": "national_s",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "lrdl",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "lrdl"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        103.808367969666,
+        30.5329464260001,
+        105.165162023466,
+        31.6805577259705
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,name,geom from hfcl where gid is not null)as hfcl",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456"
+      },
+      "id": "hfcl",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hfcl"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        103.800315924542,
+        30.5280005993205,
+        105.170105354,
+        31.700521400651
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,rn,name,rteg,bianhao,geom from lrdl_1 where gid is not null)as lrdl_1",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "lrdl_1",
+        "project": "deyang50000",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "lrdl_1",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "lrdl_1"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        103.825408990717,
+        30.5297469390001,
+        105.171787403,
+        31.6457644067413
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,hydc,name,wql,geom from hyda where gid is not null)as hyda",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "hyda",
+        "project": "national_s",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "hyda",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hyda"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        103.791946107231,
+        30.5274113400002,
+        105.171787403,
+        31.7007175805522
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select GB,FEAID,stacod,VERS,GID,STIME,ETIME,geom from boul where gb is not null)as boul",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "boul",
+        "project": "national_s",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "boul",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "boul"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        103.964001668567,
+        30.5291300290002,
+        105.137030883,
+        31.4803191020344
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,name,angle,geom from hydp where gid is not null)as hydp",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456"
+      },
+      "id": "hydp",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hydp"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        103.957335685,
+        30.5426803170002,
+        105.159194346,
+        31.5700836999856
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,geom from resa where gid is not null)as resa",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456"
+      },
+      "id": "resa",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "resa"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        103.793449168271,
+        30.5274113400004,
+        105.171536714,
+        31.7007175805522
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,type,geom from vega where gid is not null)as vega",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "vega",
+        "project": "deyang50000",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "vega",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "vega"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        104.018025196,
+        30.9141799840002,
+        104.830135853,
+        31.5042834829135
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,type,geom from hfca where gid is not null)as hfca",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "hfca",
+        "project": "deyang50000",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "hfca",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hfca"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        103.91692505,
+        30.5520401250002,
+        105.146448832,
+        31.6450064535882
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,name,geom from hfcp where gid is not null)as hfcp",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "hfcp",
+        "project": "deyang50000",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "hfcp",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hfcp"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        103.907794282,
+        30.5323885580001,
+        105.165526064,
+        31.6481638690199
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,class,name,geom from agnp where gid is not null)as agnp",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "agnp",
+        "project": "national_s",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "agnp",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "agnp"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        104.01390129,
+        30.5987657637282,
+        105.109745643515,
+        31.4587363090257
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,rn,name,geom from lrrl where gid is not null)as lrrl",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456"
+      },
+      "id": "lrrl",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "lrrl"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        103.907794282,
+        30.5323885580001,
+        105.165526064,
+        31.6481638690199
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,class,name,geom from agnp where gid is not null)as agnp_lable",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "agnp_lable",
+        "project": "national_s",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "agnp_lable",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "agnp_lable"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        103.794715683621,
+        30.5282176060006,
+        105.171787403,
+        31.690278917584
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,hydc,name,geom from hydl where gid is not null)as hydl_lable",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456"
+      },
+      "id": "hydl_lable",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hydl_lable"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        103.793449168271,
+        30.5274113400004,
+        105.171536714,
+        31.7007175805522
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,type,geom from vega where gid is not null)as vega",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456"
+      },
+      "id": "vega_label",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "vega_label"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        103.825408990717,
+        30.5297469390001,
+        105.171787403,
+        31.6457644067413
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,hydc,name,wql,geom from hyda where gid is not null)as hyda_lable",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456"
+      },
+      "id": "hyda_lable",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hyda_lable"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        103.964001668567,
+        30.5291300290002,
+        105.137030883,
+        31.4803191020344
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,name,angle,geom from hydp where gid is not null)as hydp_lable",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456"
+      },
+      "id": "hydp_lable",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hydp_lable"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        103.800315924542,
+        30.5280005993205,
+        105.170105354,
+        31.700521400651
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,rn,name,rteg,bianhao,geom from lrdl_1 where rn is not null)as lrdl_lable",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456",
+        "id": "lrdl_lable",
+        "project": "deyang50000",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "lrdl_lable",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "lrdl_lable"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        103.897887647,
+        30.5286416160001,
+        105.169563496,
+        31.6481638690199
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select gid,gb,angle,geom from resp where gid is not null)as resp",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "dynamic",
+        "extent": "",
+        "dbname": "shape",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "123456"
+      },
+      "id": "resp",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "resp"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "name": "",
+  "description": ""
+}

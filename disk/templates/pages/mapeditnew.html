@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meat charset='utf-8'>
+    <meta http-equiv='x-ua-compatible', content='IE=edge'>
+		<meta name='viewport', content='width=device-width, initial-scale=1'>
+		<meta name='apple-mobile-web-app-capable', content='yes'>
+		<meta name='apple-touch-fullscreen', content='yes'>
+		<title> 高性能制图-地图编辑</title>
+    <link href="{% static "cssjs/sbadmin2/bower_components/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static "cssjs/sbadmin2/bower_components/metisMenu/dist/metisMenu.min.css" %}" rel="stylesheet">
+
+    <!-- Social Buttons CSS -->
+    <link href="{% static "cssjs/sbadmin2/bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static "cssjs/sbadmin2/dist/css/sb-admin-2.css" %}" rel="stylesheet">
+    <link href="{% static "cssjs/mapedit/leaflet/leaflet.css" %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static "cssjs/sbadmin2/bower_components/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "cssjs/mapedit/css/user.css" %}" rel='stylesheet'>
+    <link href="{% static "cssjs/mapedit/css/codemirror.css" %}" rel='stylesheet'>
+        <link href="{% static "cssjs/mapedit/css/theme/cobalt.css" %}" rel='stylesheet'>
+
+    <script src="{% static "cssjs/sbadmin2/bower_components/jquery/dist/jquery.min.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "cssjs/sbadmin2/bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static "cssjs/sbadmin2/bower_components/metisMenu/dist/metisMenu.min.js" %}"></script>
+    <script src="{% static "cssjs/mapedit/libs/codemirror/codemirror.js" %}" > </script>
+    <script src="{% static "cssjs/mapedit/libs/codemirror/mode/css.js" %}" ></script>
+
+    <script src="{% static "cssjs/mapedit/leaflet/leaflet.js" %}"></script>
+    <script src="{% static "cssjs/colorpicker/js/colorpicker.js" %}"></script>
+    <link rel="stylesheet" href="{% static "cssjs/colorpicker/css/colorpicker.css" %}">
+
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="{% static "cssjs/mapedit/js/lzxmapEditorUI.js" %}"></script>
+    <style>
+    #left{
+      position: absolute;
+      top:50px;
+      left: 0px;
+      right:0;
+      bottom: 0px;
+      border-right: 2px #eee solid;
+    }
+    h4{text-align:center;}
+    .colorpicker{
+      z-index: 999;
+    }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-color:transparent">
+  <div class="navbar-header">
+      <a class="glyphicon glyphicon-chevron-left  navbar-brand" href="/main/">返回首页</a>
+      <div style="position:absolute;right:10px;top:10px" >
+        <button type="button" id='sideopen1' class="btn btn-primary "><i class="fa fa-list "></i>
+        </button>
+      </div>
+      <div id="buttons" style="position:absolute;right:10px;top:10px" >
+        <button type="button" id='sideopen' class="btn btn-primary "><i class="fa fa-list"></i>
+        </button>
+        <button type="button" id='submitMss' class="btn btn-primary"><i class="fa fa-check"></i>
+        </button>
+        <!--
+        <button type="button" class="btn btn-primary "><i class="fa fa-pencil"></i>
+        </button>
+        <button type="button"  class="btn btn-primary"><i class="fa fa-lock "></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="fa fa-flag"></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="fa fa-camera"></i>
+        </button>
+
+        <button type="button" class="btn btn-primary "><i class="fa fa-wrench"></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="fa fa-share-alt  "></i>
+        </button>
+        <button type="button" class="btn btn-primary"><i class="fa  fa-file-text "></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="glyphicon  glyphicon-question-sign  "></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="fa fa-link"></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="glyphicon  glyphicon-info-sign"></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="glyphicon glyphicon-user"></i>
+        </button>
+        <button type="button" class="btn btn-primary "><i class="fa fa-heart"></i>
+        </button> -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mapTemplatesModal"><i class="fa fa-wrench"></i></button>
+        <button onclick="changeTheme()" type="button" class="btn btn-primary"><i id='themechange' class="fa fa-moon-o"></i></button>
+      </div>
+
+  </div>
+</nav>
+<div id="map" calss="map" style="background-color:white"></div>
+<div id="sidemenu" class="leftsidebar">
+  <a id="layer" style="bottom:0px;" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-list"></i>
+  </a>
+  <a id="font" style="bottom:60px;" class="btn btn-primary btn-circle btn-lg" ><i class="glyphicon glyphicon-font "></i>
+  </a>
+</div>
+<div isopen="closed" id="layerpenl" class="dialogpenl" style="bottom: 20px;">
+     <li class="list-group-item active">图层
+         <i href="#" data-toggle="modal" data-target="#importModal" class="iconinlayer glyphicon glyphicon-plus"></i>
+         <i  style="position:absolute;right:100px;top:15px;" href='#' class="fa fa-eye"></i>
+         <form role="form" style="position:absolute;right:50px;top:12px;"> <button id="refresh"  class=" refresh glyphicon glyphicon-refresh" ></button></form>
+     </li>
+  <ul id="layergroup" class="list-group">
+  </ul>
+</div>
+<div isopen="closed" id="fontpenl" class="dialogpenl" style="bottom: 80px;min-width:10%;max-height:50%;">
+  <li class="list-group-item active">字体 <i href="#" class="iconinlayer glyphicon glyphicon-plus"></i></li>
+  <ul id="fontgroup" class="list-group">
+    {% for font in fonts %}
+    <li class="list-group-item">{{font}}:<a href='#' style="font-family:{{font}}">&nbsp;&nbsp;&nbsp;This Text Means Nothing</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<div  id="sidebar" class="sidebar">
+    <ul id="myTab" class="nav nav-tabs">
+       <li class="active"><a href="#mapeditor" data-toggle="tab">codeEditor</a></li>
+       <li ><a href="#mapeditorUI" data-toggle="tab">uiEditor</a></li>
+       <li ><a href="#log" data-toggle="tab">log</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+       <div class="tab-pane fade in active" id="mapeditor">
+         <form id="editorform" role="form" method="POST" enctype="multipart/form-data">
+           <div class="form-group editor "><textarea id="mssStyle" name="mssStyle" >{{mssStyle}}</textarea></div>
+          </form>
+       </div>
+       <div class="tab-pane fade" id="mapeditorUI" ng-app="editor" ng-controller = "Editor">
+         <div id="left">
+           <div style="position:absolute;left:0; width:30%; top:0px; bottom:0px;background-color:white;border-right: 2px #eee solid;overflow:auto;overflow-x: hidden">
+
+             <div id='editlayers' class="list-group">
+               <a name = {[{l.name}]} href='#'  geotype= {[{l.geometry}]} class="list-group-item" ng-repeat="l in layers"  ng-click="layereditor($event)">
+                   <i class="fa fa-tasks fa-fw"> </i>{[{l.name}]}
+                   <span class="pull-right text-muted small"><em>{[{l.geometry}]}</em>
+                   </span>
+               </a>
+             </div>
+           </div>
+           <div  style="position:absolute;left:30%;top:0px;bottom:60%;background-color:white;width:35%;border-bottom: 2px #eee solid;overflow:auto;overflow-x: hidden">
+             <div id="sublayerspanel"  class="panel panel-default" style="display:none;">
+               <span id='activelayer' class="input-group-addon">Active Layer </span>
+               <div style="margin-top:5px"  ng-init="sublayers=[];no = 0;sublayers_name={}" >
+                 <div  class="form-group input-group" ng-repeat="sub in sublayers;">
+                  <div class="input-group-btn" style="width:35%">
+                      <input readonly='readonly'  id = {[{sub}]} type="text" class="form-control" value={[{sublayers_name[sub]}]}>
+                  </div>
+                  <span class="input-group-addon">
+                    <button href="#" class="glyphicon glyphicon-pencil" ng-click = "isReadonly(sub)"></button>
+                    <button href="#" class="fa fa-trash-o" ng-click ="delete_sub(sub)"></button>
+                    <button href="#" class="fa fa-arrow-right" ng-click ="nextfiltershow(sub)"></button>
+                  </span>
+               </div>
+               </div>
+               <li class="list-group-item active">添加子图层
+                   <i href="#"  style ="position:absolute;right:30%;top:30%;cursor:pointer" class="glyphicon glyphicon-plus" ng-click="no=no+1;sublayers.push('sub_'+no);">是</i>
+               </li>
+           </div>
+         </div>
+           <div style="position:absolute;left:30%;top:40%;bottom:0px;background-color:white;width:35%;border-top: 2px #eee solid;overflow:auto;overflow-x: hidden">
+             <div id="filterpanel"  class="panel panel-default" style="display:none" ng-init="filters=[];no_1 = 0;filter_texts={}">
+               <span id='sublayer' class="input-group-addon"> subLayer </span>
+               <div class="panel-heading">
+                   过滤条件
+               </div>
+               <div class="panel-body" style="width:;" ng-repeat="fil in filters" style="border-bottom:2px #eee solid;">
+                 <div class="form-group input-group">
+                     <span class="input-group-addon">字段</span>
+                     <textarea readonly='readonly' id={[{fil}]} type="text" class="form-control" placeholder="" value={[{filter_texts[fil]}]}>{[{filter_texts[fil]}]}</textarea>
+                 </div>
+                   <div class="form-group input-group">
+                     <span class="input-group-btn">
+                         <button class="btn btn-default btn-block" type="button" ng-click="isReadonly(fil)">
+                             <i class="glyphicon glyphicon-pencil"></i>
+                         </button>
+                     </span>
+                     <span class="input-group-btn">
+                         <button  class="btn btn-default btn-block" type="button" ng-click="delete_fil(fil)">
+                             <i class="fa fa-trash-o"></i>
+                         </button>
+                     </span>
+                     <span class="input-group-btn">
+                         <button  class="btn btn-default btn-block" type="button" ng-click="filterbutton(fil)">
+                             <i class="fa fa-arrow-right"></i>
+                         </button>
+                     </span>
+                   </div>
+               </div>
+                 <li class="list-group-item active">添过滤条件
+                     <i href="#"  style ="position:absolute;right:30%;top:30%;cursor:pointer" class="glyphicon glyphicon-plus" ng-click="no_1=no_1+1;filters.push('fil'+no_1);" ></i>
+                 </li>
+             </div>
+           </div>
+           <div id='layersuieditor' ng-init=""  style="position:absolute;left:65%;top:0px;bottom:0px;background-color:white;width:35%;border-left: 2px #eee solid;overflow:auto;overflow-x: hidden">
+             <div id="polygon" class="panel panel-default" style="display:none">
+                 <div class="panel-heading">
+                     面-边界
+                 </div>
+                 <div class="panel-body">
+                   <div class="form-group input-group">
+                       <span class="input-group-addon">线宽</span>
+                       <!-- <div id="slider-range-min" class="form-control"></div> -->
+                       <input geotype ="polygon" id='polygon-line-width' type="text" class="form-control" value="" >
+                   </div>
+                   <div class="form-group input-group">
+                       <span class="input-group-addon">颜色</span>
+                       <input geotype ="polygon" id='polygon-line-color'  class="form-control color_picker" value="">
+                   </div>
+                 </div>
+                 <div class="panel-heading">
+                     面-填充
+                 </div>
+                 <div class="panel-body">
+                   <div class="form-group input-group">
+                       <span class="input-group-addon">颜色</span>
+                       <input geotype ="polygon" id='polygon-fill-color' class="form-control color_picker"  value=""/>
+                   </div>
+                   <div class="form-group input-group">
+                       <span class="input-group-addon">透明度</span>
+                      <input geotype ="polygon" id='polygon-fill-opacity' type="text" class="form-control" placeholder="值小于1">
+                   </div>
+                 </div>
+             </div>
+             <div id="line" class="panel panel-default" style="display:none">
+                 <div class="panel-heading">
+                     线
+                 </div>
+                 <div class="panel-body">
+                   <div class="form-group input-group">
+                       <span class="input-group-addon">线宽</span>
+                       <input geotype ="linestring" id="polyline-width" type="text" class="form-control" placeholder="">
+                   </div>
+                   <div class="form-group input-group">
+                       <span class="input-group-addon">颜色</span>
+                       <input geotype ="linestring" id="polyline-color" class="form-control color_picker"  value="">
+                   </div>
+                 </div>
+             </div>
+             <div id="point" class="panel panel-default" style="display:none">
+                 <div class="panel-heading">
+                     点
+                 </div>
+                 <div class="panel-body">
+                   <div class="form-group input-group">
+                       <span class="input-group-addon">大小</span>
+                       <input geotype ="point" id="marker-width" type="text" class="form-control" placeholder="">
+                   </div>
+                   <div class="form-group input-group">
+                       <span class="input-group-addon">颜色</span>
+                       <input geotype = "point" id="marker-color" class="form-control color_picker" value="">
+                   </div>
+                 </div>
+             </div>
+           </div>
+         </div>
+
+       </div>
+       <div class="tab-pane fade" id="log">
+         <div class="panel-body">
+             <div class="alert alert-success alert-dismissable">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 log:{{log}} <a href="#" class="alert-link"></a>.
+             </div>
+             <div class="alert alert-info alert-dismissable">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 1.目前编辑器不支持在已有字段上修改，修改后的与修改前的都会保留 <a href="#" class="alert-link"></a>.
+             </div>
+             <div class="alert alert-info alert-dismissable">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 2.修改后的会压盖在修改后之上! <a href="#" class="alert-link"></a>.
+             </div>
+             <div class="alert alert-info alert-dismissable">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 3.若果修改后的样式代码不符合语法规则，会在log里面输出错误信息，css代码与地图均不改变，保留之前最后正确的一次 <a href="#" class="alert-link"></a>.
+             </div>
+             <div class="alert alert-info alert-dismissable">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 4.目前样式编辑只局限于点线面的颜色与线宽设置，其他复杂功能要逐步完善！ <a href="#" class="alert-link"></a>.
+             </div>
+             <div class="alert alert-info alert-dismissable">
+                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 地图编辑器 Version 1.0 by LZX 2016.9 <a href="#" class="alert-link"></a>.
+             </div>
+         </div>
+       </div>
+    </div>
+</div>
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="Import Data">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="importModal">添加图层</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+            <div class="form-group input-group">
+                <span class="input-group-addon">添加类型</span>
+                <select id="addType" type="text" class="input-large form-control" placeholder="多层">
+                  <option value="single">单层</option>
+                  <option value="multi">多层</option>
+                </select>
+            </div>
+            <div class="form-group input-group">
+                <span class="input-group-addon">图层信息</span>
+                <textarea id="addlayerinfo" type="text" class="form-control" rows="15"></textarea>
+            </div>
+            <button id="addlayer" type="submit" class="btn btn-primary" >提交</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="removelayerModal" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               删除图层
+            </h4>
+         </div>
+         <div class="modal-body">
+           <h5 >确定要删除以下图层吗？<h5 id="removetips"></h5></h5>
+           <form role="form">
+               <button id="removelayer" type="submit" class="btn btn-primary" >确定删除</button>
+           </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+               data-dismiss="modal">取消
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<div class="modal fade" id="mapTemplatesModal" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+           <button type="button" class="close"
+              data-dismiss="modal" aria-hidden="true">
+                 &times;
+           </button>
+           <h4 class="modal-title" id="myModalLabel">
+              地图模板
+           </h4>
+        </div>
+      <div class="modal-body"  style="margin-top:5%;margin-left:15%;width:400px;height:400px;overflow:auto;overflow-x: hidden;">
+        <div id="junbiao_T" data-dismiss="modal" class="mapTemplates btn btn-default panel panel-default" style="padding:10%;width:100%;height:40%;background-image: url({% static 'images/junbiao.png' %});">
+          <h1>军标</h1>
+        </div>
+        <div id="guobiao_T" data-dismiss="modal" class="mapTemplates btn btn-default panel panel-default" style="padding:10%;width:100%;height:40%;background-image: url({% static 'images/guobiao.png' %});">
+          <h1>国标</h1>
+        </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<script src="{% static "cssjs/mapedit/js/csseditor.js" %}" type="text/javascript"> </script>
+<script>
+  map = L.map("map").setView([31.13,104.40], 14);
+  m_layer = L.tileLayer('http://{{ip}}:{{port}}/{{layername}}/{z}/{x}/{y}.png');
+  m_layer.addTo(map);
+  var GetLayers = function(){
+    $.ajax({
+      url: "/getLayers/",
+      data:{},
+      type: "POST",
+      dataType:'json',
+      success:function(data){successCallBack(data);},
+      error:function(er){}
+    });
+  };
+  var successCallBack = function(data){
+    $('#layergroup').empty();
+    for(var layer in data)
+    {
+      var text = '<li id="'+data[layer]['name']+'" class="list-group-item">'+data[layer]['name']+'<i href="#" data-toggle="modal" data-target="#removelayerModal" class="iconinlayer glyphicon glyphicon-remove"></i></li>';
+      $('#layergroup').append(text);
+    }
+    $('.iconinlayer.glyphicon.glyphicon-remove').click(function(){
+      var ln = $(this).parent().text();
+      ln = ln.replace(/\s/g,"");
+      $('#removetips').text(ln);
+    });
+    $('.layereditor.list-group-item').click(function(){
+      var t = $(this).attr('id');
+      $('#activelayer').text('Active Layer : '+t);
+      var geotype = $(this).children('span').children('em').text();
+      if(geotype=='polygon')
+      {
+        $('#layersuieditor').children().hide();
+        $('#polygon').show('fadeout');
+        $('#activelayer').show('fadeout');
+      }
+      else if(geotype=='linestring')
+      {
+        $('#layersuieditor').children().hide();
+        $('#line').show('fadeout');
+        $('#activelayer').show('fadeout');
+      }
+      else {
+        $('#layersuieditor').children().hide();
+        $('#point').show('fadeout');
+        $('#activelayer').show('fadeout');
+      }
+    });
+  };
+var changeTheme =function(){
+  if($('#themechange').attr('class')== 'fa fa-moon-o')
+  {
+    codeMirror.setOption("theme", "cobalt");
+    $('#themechange').attr('class','fa fa-sun-o');
+  }
+  else {
+    codeMirror.setOption("theme", "default");
+    $('#themechange').attr('class','fa fa-moon-o');
+  }
+};
+  $(document).ready(function() {
+    $('#sideopen,#sideopen1').click(function(){
+      $('#sidebar').animate({width:'toggle'});
+      $('#buttons').fadeToggle();;
+    });
+    $('#submitMss').click(function(){
+      $('#editorform').submit();
+      window.localStorage['mssjson'] = JSON.stringify(mssInfo);
+      console.log(window.localStorage['mssjson']);
+    });
+    console.log(JSON.stringify(mssInfo));
+     GetLayers();
+     L.control.scale({metric:true,position:'bottomleft',imperial:false}).addTo(map);
+    $('#layer').click(function(){$('#layerpenl').fadeToggle();});
+    $('#font').click(function(){$('#fontpenl').fadeToggle();});
+    $('#addlayer').click(function(){
+      var aln = $('#addType').val();
+      var info = $('#addlayerinfo').val();
+      $.ajax({
+        url: "/modifylayer/1/",
+        data:{addlayerinfo:info,addType:aln},
+        type: "POST",
+        dataType:'json',
+        success:function(data){
+        //  m_layer.redraw();
+        },
+        error:function(er){}
+      });
+    });
+    $('#removelayer').click(function(){
+      var ln = $('#removetips').text();
+      $('#'+ln).remove();
+      if(ln!='')
+      {
+        $.ajax({
+          url: "/modifylayer/0/",
+          data:{removelayername:ln},
+          type: "POST",
+          dataType:'json',
+          success:function(data){
+          },
+          error:function(er){}
+        });
+      }
+    });
+    $('.mapTemplates').click(function(){
+      var id = $(this).attr('id');
+      id = id.replace(/\s/g,"");
+      console.log(id);
+      $.get("/map_Template/"+id,function(data){
+        codeMirror.setValue(data['data']);
+        $('#editorform').submit();
+  });
+    });
+  });
+</script>
+</body>
+</html>

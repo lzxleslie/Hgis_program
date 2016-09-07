@@ -1,0 +1,412 @@
+mssInfo = {};
+current_Ui = {};
+$('input').bind("input propertychange",function(){
+  console.log('change');
+  uiTocode_3($(this).attr('geotype'));
+  console.log(JSON.stringify(mssInfo));
+  $('#right').text(jsonObjToMss(mssInfo));
+});
+  // $( "#slider-range-min" ).slider({
+  //   range: "min",
+  //   value: 1,
+  //   min: 0,
+  //   max: 100,
+  //   slide: function( event, ui ) {
+  //     $( "#polygon-line-width" ).val(ui.value );
+  //   }
+  // });
+$('.color_picker').each( function() {
+  var thisInput = $(this);
+  thisInput.ColorPicker({
+        onSubmit: function(hsb, hex, rgb, el) {
+          $(el).val(hex);
+          $(el).ColorPickerHide();
+        },
+        onBeforeShow: function () {
+          $(this).ColorPickerSetColor(this.value);
+        },
+        onChange: function (hsb, hex, rgb) {
+          thisInput.val('rgb('+rgb.r+','+rgb.g+','+rgb.b+')');
+          uiTocode_3(thisInput.attr('geotype'));
+          $('#right').text(jsonObjToMss(mssInfo));
+          console.log(JSON.stringify(mssInfo));
+        }
+      })
+});
+var layershow = function(geotype){
+  if(geotype=='polygon')
+  {
+    $('#layersuieditor').children().hide();
+    $('#polygon').show('fadeout');
+  }
+  else if(geotype=='linestring')
+  {
+    $('#layersuieditor').children().hide();
+    $('#line').show('fadeout');
+  }
+  else if(geotype=='point')
+  {
+    $('#layersuieditor').children().hide();
+    $('#point').show('fadeout');
+  }
+};
+var ini_last_cur_mss = function(currentMss)
+{
+  currentMss['line-width'] ="";
+  currentMss['line-color'] ="";
+  currentMss['fill-color'] ="";
+  currentMss['fill-opa'] ="";
+  currentMss['line-width'] ="";
+  currentMss['line-color'] ="";
+  currentMss['marker-width'] ="";
+  currentMss['marker-color'] ="";
+};
+var filtershow = function(geotype,name,subnameid){
+  $('#layersuieditor').children().hide();
+  if(subnameid!='no-sub')
+  {
+    var subname = $('#'+subnameid).val();
+  }
+  else {
+    subname ="";
+  }
+  $('#sublayer').text(subname);
+  current_Ui['sublayername'] = subname;
+
+  console.log(JSON.stringify(mssInfo));
+
+  $('#filterpanel').hide();
+  $('#filterpanel').show('fadeout');
+};
+var sublayershow = function(geotype,name){
+  $('#layersuieditor').children().hide();
+  $('#filterpanel').hide();
+  $('#sublayerspanel').hide();
+  $('#sublayerspanel').show('fateout');
+  $('#activelayer').text(name);
+};
+var CodeToUi_1 = function(geotype,name){
+  var sublayers_count = [];
+  var sublayers_name ={};
+  var sub_c ={'count':sublayers_count,'names':sublayers_name};
+  if((name in mssInfo)&&('sublayers' in mssInfo[name])&&(mssInfo[name]['sublayers']!={}))
+  {
+    sub_c = code_to_ui_1(name);
+  }
+  else {
+    mssInfo[name] = {};
+    mssInfo[name]['sublayers']={};
+    if(geotype=='polygon')
+    {
+      mssInfo[name]['geotype'] = 'polygon';
+    }
+    else if(geotype=='linestring')
+    {
+      mssInfo[name]['geotype'] = 'linestring';
+    }
+    else if(geotype=='point')
+    {
+      mssInfo[name]['geotype'] = 'point';
+    }
+  }
+  return sub_c;
+};
+var CodeToUi_2 = function(geotype,name,subnameid){
+  if(subnameid!='no-sub')
+  {
+    var subname = $('#'+subnameid).val();
+  }
+  else {
+    subname ="";
+  }
+  var filter_count = [];
+  var filters_name ={};
+  var sub_c ={'count':filter_count,'names':filters_name};
+  console.log("CodeToUi_2:"+JSON.stringify(mssInfo));
+  if((name in mssInfo)&&('sublayers' in mssInfo[name])&&(mssInfo[name]['sublayers']!={})&&(subname in mssInfo[name]['sublayers'])&&(mssInfo[name]['sublayers'][subname]!={}))
+  {
+    sub_c = code_to_ui_2(name,subname);
+  }
+  else {
+      mssInfo[name]['sublayers'][subname]={};
+  }
+  return sub_c;
+};
+var CodeToUi_3 = function(geotype,name,filid){
+  var currentMss={}
+  if(mssInfo[name]['sublayers']!={})
+  {
+    var filter_text = $('#'+filid).val();
+    if(mssInfo[name]['sublayers'][$('#sublayer').text()]!={}&&(filter_text in mssInfo[name]['sublayers'][$('#sublayer').text()]))
+    {
+      currentMss = mssInfo[name]['sublayers'][$('#sublayer').text()][filter_text];
+    }
+    else {
+            mssInfo[name]['sublayers'][$('#sublayer').text()][filter_text]={};
+            ini_last_cur_mss(currentMss);
+    }
+    current_Ui['filter'] = filter_text;
+    return currentMss;
+  }
+};
+var uiTocode_3 = function(geotype){
+  var name = current_Ui['layername'];
+  var sublayername = current_Ui['sublayername'];
+  var filter = current_Ui['filter'];
+  var currentMss = mssInfo[name]['sublayers'][sublayername][filter];
+  if(geotype=='polygon')
+  {
+     currentMss['line-width'] =$('#polygon-line-width').val();
+     currentMss['line-color'] =$('#polygon-line-color').val();
+     currentMss['fill-color'] =$('#polygon-fill-color').val();
+     currentMss['fill-opa'] =$('#polygon-fill-opacity').val();
+  }
+  else if(geotype=='linestring')
+  {
+     currentMss['line-width'] =$('#polyline-width').val();
+     currentMss['line-color'] =$('#polyline-color').val();
+  }
+  else if(geotype=='point')
+  {
+     currentMss['marker-width'] =$('#marker-width').val();
+     currentMss['marker-color'] =$('#marker-color').val();
+  }
+}
+var ui_init = function(geotype,mss){
+  console.log(JSON.stringify(mss));
+  if(mss!={})
+  {
+    if(geotype=='polygon')
+    {
+      $('#polygon-line-width').val(mss['line-width']);
+      $('#polygon-line-color').val(mss['line-color']);
+      $('#polygon-fill-color').val(mss['fill-color']);
+      $('#polygon-fill-opacity').val(mss['fill-opa']);
+    }
+    else if(geotype=='linestring')
+    {
+        $('#polyline-width').val(mss['line-width']);
+        $('#polyline-color').val(mss['line-color']);
+    }
+    else if(geotype=='point')
+    {
+        $('#marker-width').val(mss['marker-width']);
+        $('#marker-color').val(mss['marker-color']);
+    }
+  }
+  else {
+    alert("");
+    if(geotype=='polygon')
+    {
+      $('#polygon-line-width').val("");
+      $('#polygon-line-color').val("");
+      $('#polygon-fill-color').val("");
+      $('#polygon-fill-opacity').val('');
+    }
+    else if(geotype=='linestring')
+    {
+        $('#polyline-width').val('');
+        $('#polyline-color').val('');
+    }
+    else if(geotype=='point')
+    {
+        $('#marker-width').val('');
+        $('#marker-color').val('');
+    }
+  }
+};
+var isReadonly = function(id){
+  if($('#'+id).attr('readonly')=='readonly')
+  {
+    $('#'+id).removeAttr("readonly","readonly");
+
+  }
+  else {
+    $('#'+id).attr("readonly","readonly");
+  }
+
+};
+var code_to_ui_1 = function(name){
+var sublayers_count =[];
+var sublayers_name = {}
+var n = 0;
+for(var i in mssInfo[name]['sublayers'])
+{
+  n=n+1;
+  var id ='sub'+n;
+  sublayers_count.push(id);
+  sublayers_name[id] = i;
+}
+return {'count':sublayers_count,'names':sublayers_name};
+}
+var code_to_ui_2 = function(name,subname){
+var filter_count =[];
+var filters_name = {}
+var n = 0;
+for(var i in mssInfo[name]['sublayers'][subname])
+{
+  n=n+1;
+  var id ='fil'+n;
+  filter_count.push(id);
+  filters_name[id] = i;
+}
+return {'count':filter_count,'names':filters_name};
+};
+function isEmpty(obj)
+{
+  for (var name in obj)
+  {
+      return false;
+  }
+  return true;
+};
+var jsonObjToMss = function(obj){
+ var cartocss='';
+ for(var layername in obj)
+ {
+   cartocss += '#'+layername+'{';
+   for(var sublayername in obj[layername]['sublayers'])
+   {
+     if(sublayername!="")
+     {
+        cartocss += '::'+sublayername+'{';
+     }
+     for(var filter in obj[layername]['sublayers'][sublayername])
+     {
+       var geotype = obj[layername]['geotype'];
+       var cur =obj[layername]['sublayers'][sublayername][filter];
+       if(filter!="")
+       {
+          cartocss += filter+'{';
+       }
+       if(!isEmpty(cur))
+       {
+         if(geotype=='polygon')
+         {
+           if(!(/^$/.test(cur['line-width'])))
+           {
+             cartocss+='line-width:'+cur['line-width']+';\n';
+           }
+           if(!(/^$/.test(cur['line-color'])))
+           {
+             cartocss+='line-color:'+cur['line-color']+';\n';
+           }
+           if(cur['fill-color']!="")
+           {
+              cartocss+= 'polygon-fill:'+cur['fill-color']+';\n';
+           }
+           if(cur['fill-opa']!="")
+           {
+             cartocss+= 'polygon-opacity:'+cur['fill-opa']+';\n';
+           }
+         }
+         else if(geotype=='linestring'){
+           if(cur['line-width']!="")
+           {
+             cartocss+='line-width:'+cur['line-width']+';\n';
+           }
+           if(cur['line-color']!="")
+           {
+             cartocss+='line-color:'+cur['line-color']+';\n';
+           }
+         }
+         else if(geotype=='point')
+         {
+           if(cur['marker-width']!="")
+           {
+              cartocss+='marker-width:'+cur['marker-width']+';\n';
+           }
+           if(cur['marker-color']!="")
+           {
+             cartocss+='marker-color:'+cur['marker-color']+';\n';
+           }
+         }
+       }
+
+       if(filter!="")
+       {
+          cartocss+='}';
+       }
+
+     }
+     if(sublayername!="")
+     {
+        cartocss+='}';
+     }
+   }
+   cartocss+='}';
+ }
+ return cartocss;
+}
+
+app .constant('mssInfo', 'current_Ui');
+app.controller("Editor", function($scope, $http) {
+  $http.get("/getLayers/")
+  .success(function (response) {
+    $scope.layers = response;
+    $scope.layereditor = function(event){
+      var geotype = event.target.getAttribute('geotype');
+      var name = event.target.getAttribute('name');
+      if(geotype!=null&&name!=null)
+      {
+        current_Ui = {"layername":"","sublayername":"","filter":""};
+        current_Ui['layername'] = name;
+        var res = CodeToUi_1(geotype,name);
+        $scope.sublayers_name=res['names'];
+        $scope.sublayers =res['count'] ;
+        sublayershow(geotype,name);
+        console.log(JSON.stringify(mssInfo));
+      }
+      $scope.nextfiltershow= function(value){
+        if(geotype!=null&&name!=null)
+        {
+          var res = CodeToUi_2(geotype,name,value);
+          console.log(res['names']);
+          $scope.filters = res['count'];
+          $scope.filter_texts = res['names'];
+          filtershow(geotype,name,value);
+        }
+      }
+      $scope.filterbutton = function(filid){
+        if(geotype!=null&&name!=null)
+        {
+          var mss= CodeToUi_3(geotype,name,filid);
+          console.log(mss);
+          ui_init(geotype,mss);
+          layershow(geotype);
+          console.log(JSON.stringify(mssInfo));
+        }
+      };
+      $scope.isReadonly = function(sub)
+      {
+        isReadonly(sub);
+      }
+      $scope.delete_sub = function (sub) {
+        var subname = $('#'+sub).val();
+        var index = $scope.sublayers.indexOf(sub);
+        console.log(index);
+        if (index > -1) { $scope.sublayers.splice(index, 1); }
+        $('#filterpanel').hide();
+        if(mssInfo!={}&&('sublayers' in mssInfo[name])&&(subname in mssInfo[name]['sublayers']))
+        {
+          delete mssInfo[name]['sublayers'][subname];
+        }
+        console.log(JSON.stringify(mssInfo));
+      }
+      $scope.delete_fil = function (fil) {
+        var subname = current_Ui['sublayername'];
+        console.log(subname);
+        var filter = $('#'+fil).val();
+        var index = $scope.filters.indexOf(fil);
+        console.log(index);
+        if (index > -1) { $scope.filters.splice(index, 1); }
+        $('#layersuieditor').children().hide();
+        if(mssInfo!={}&&('sublayers' in mssInfo[name])&&(subname in mssInfo[name]['sublayers']&&(filter in mssInfo[name]['sublayers'][subname])))
+        {
+          delete mssInfo[name]['sublayers'][subname][filter];
+        }
+        console.log(JSON.stringify(mssInfo));
+      }
+    };
+  });
+});

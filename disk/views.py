@@ -6,7 +6,7 @@ import ModestMaps
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render,render_to_response, redirect
 from django import forms
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect,FileResponse
 from disk.models import User_import_data, User
 from django.contrib.auth.hashers import make_password
 from tile import *
@@ -21,6 +21,7 @@ import tilelist
 from form import *
 from post2table import *
 import commands
+import ip
 TILECONFIG = None
 CFG = '.'
 def upload(request):
@@ -56,9 +57,8 @@ def tile(request,layer,z,y,x,extension):
     #pre-edit tileStacheConfig file
     content = getTile(layer,extension,x,y,z,CFG )
     if extension == 'png' or extension=='jpg' :
-        response = HttpResponse(content,content_type="image/"+extension)
-        #img=Image.open(content)
-        #img.save(response, 'png')
+        response = FileResponse(content)
+        #response = HttpResponse(content)
     else :
         # geojson format
         jsonFile = open(content)
@@ -76,6 +76,10 @@ def main(request):
     else:
         upload(request)
     return render(request, 'pages/blank.html')
+def angular(request):
+    return render(request, 'pages/angular_test.html')
+def huibiao(request):
+    return render(request, 'pages/huibiaoindex.html')
 def mapEdit(request,layername):
    # res = None
    # if request.user.is_authenticated():
@@ -89,7 +93,6 @@ def mapEdit(request,layername):
     log = ""
     print request.method
     if request.method == "POST":
-        print "caocaocao"
         mssStyle = request.POST['mssStyle']       
         log = mss2xml(mssStyle)
     if log==(0, 'SUCCESS'):
@@ -98,10 +101,13 @@ def mapEdit(request,layername):
         file_object.close( ) 
     #else:
        # mssStyle=open('media/mss2xml/save.mss','r').read()
+    fonts = getFontList(request)
     port = '8888'
+    ip_address = ip.get_ip_address('eth0')
     if(layername==request.user.username):
         port='8000'
-    return render(request, 'pages/test.html',{'layername':layername,'mssStyle':mssStyle,'log':log,'port':port,'isopen':'closed','display':'none'})
+        return render(request, 'pages/mapeditnew.html',{'ip':ip_address,'fonts':fonts,'layername':layername,'mssStyle':mssStyle,'log':log,'port':port,'isopen':'closed','display':'none'})
+    return render(request, 'pages/basemap.html',{'ip':ip_address,'layername':layername,'port':port})
 def getLayersFromMml(request):
     mmlfile=open('media/mss2xml/project.mml')
     mml=json.load(mmlfile)
@@ -109,8 +115,22 @@ def getLayersFromMml(request):
     layers = []
     for layer in mml['Layer']:
         if layer!={}:
-            layers.append(layer['name'])
+            layerinfo={}
+            layerinfo['name']=layer['name']
+            layerinfo['Datasource'] = layer['Datasource']
+            layerinfo['geometry'] = layer['geometry']
+            layers.append(layerinfo)
     return HttpResponse(json.dumps(layers), content_type="application/json") 
+def getFontList(request):
+    fontengine = mapnik.FontEngine
+    fonts = fontengine.instance().face_names()
+    print fonts
+    return fonts
+def getMssTemplate(request,mss_T):
+    mssTemplates = open('media/mss2xml/'+mss_T+'_style.mss').read()
+    res = {}
+    res['data'] = mssTemplates
+    return HttpResponse(json.dumps(res), content_type="application/json") 
 def modifyLayer(request,modify_type):
     mml=json.load(open('media/mss2xml/project.mml','r'))
     if modify_type=='0':
@@ -136,9 +156,13 @@ def modifyLayer(request,modify_type):
                 mml['Layer'].extend(info)
     json.dump(mml,open('media/mss2xml/project.mml','w')) 
     commands.getstatusoutput('cd /home/whu/projects/osmdjango/media/mss2xml&&node mss2xml.js')    
-def table(request,tablename):
-    sql = "select * from "+tablename
-    res = postGisToJson(sql)
+def table(request,sqltype):
+    sql = request.POST['sql']
+    if sqltype == '0':  
+        sql = "select * from "+sql
+        res = postGisToJson(sql)
+    elif sqltype == '1':
+        res = postGisToJson(sql)
     return HttpResponse(json.dumps(res), content_type="application/json")  
 def datapage(request):
     rows = TablesOfDataBase(request.user.username)

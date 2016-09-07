@@ -62,13 +62,16 @@
   <form id="editorform" role="form" method="POST" enctype="multipart/form-data">
     <ul id="myTab" class="nav nav-tabs">
        <li class="active"><a href="#mapeditor" data-toggle="tab">mss</a></li>
+       <li ><a href="#log" data-toggle="tab">log</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
        <div class="tab-pane fade in active" id="mapeditor">
+        <div class="form-group editor "><textarea id="mssStyle" name="mssStyle" >{{mssStyle}}</textarea></div>
+       </div>
+       <div class="tab-pane fade in active" id="log">
          <div  class="alert alert-success">
              log:{{log}}<a style="position:absolute;right:10px" href="#" class="alert-link">更多信息</a>.
          </div>
-        <div class="form-group editor "><textarea id="mssStyle" name="mssStyle" >{{mssStyle}}</textarea></div>
        </div>
     </div>
     <div id="colorpicker" style="position:absolute;bottom:10px;left:0px;z-index:999">
